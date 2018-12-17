@@ -6,18 +6,77 @@
 
 // Contact Form Scripts
 //alert($(window).width());
+var result = {};
+var tab = 1;;
+var row;
+var countTab = 5;
+var countSelected = 6;
+
+function initData()
+{
+    var parent_tab;
+    var row;
+    result.tab = [];
+    for(tab=1;tab<=countTab;tab++)
+    {
+        result.tab[tab] = {};
+        result.tab[tab].row = [];
+        $('.conten-tab-text').each(function(e){
+            parent_tab = parseInt($(this).parent().parents().attr('parent-tab'));
+            if(tab == parent_tab)
+            {
+                row = parseInt($(this).parent().attr('row'));
+                result.tab[tab].row[row] = {};
+                //set content for row
+                result.tab[tab].row[row].content = $(this).html();
+                result.tab[tab].row[row].selected = [];
+                //set selected for row
+                for(selected=1;selected<=countSelected;selected++)
+                 result.tab[tab].row[row].selected[selected]= 'no';
+            }
+        })
+    }
+}
 function showAnimation(tab)
 {
-    $(tab).show();
+    //$(tab).show();
 }
+
 function hideAnimation(tab)
 {
-    $(tab).hide();
+    //$(tab).hide();
 }
+
+function setValueSelected(tab,row,value,selected)
+{
+   //result.tab[tab].row[row] = (result.tab[tab].row[row] != null)?result.tab[tab].row[row]:{};
+   //result.tab[tab].row[row].content = content;
+   //result.tab[tab].row[row].selected = (result.tab[tab].row[row].selected != null)? result.tab[tab].row[row].selected :{};
+   var text = (selected)? 'yes':'no';
+   result.tab[tab].row[row].selected[value] = text;
+}
+
 $("document").ready(function(){
-    var result=[];
-    var tab;
-    var row;
+    initData();
+    
+    $( '#example1' ).sliderPro({
+			width: 960,
+			height: 500,
+			arrows: true,
+			buttons: false,
+			waitForLayers: true,
+			thumbnailWidth: 200,
+			thumbnailHeight: 100,
+			thumbnailPointer: true,
+			autoplay: false,
+			autoScaleLayers: false,
+			breakpoints: {
+				500: {
+					thumbnailWidth: 120,
+					thumbnailHeight: 50
+				}
+			}
+		});
     
     $('.tab-header').click(function(){
         //set page
@@ -34,8 +93,25 @@ $("document").ready(function(){
     })
     
     $(".content-tab input[type='checkbox']").click(function(){
-        var text = $(this).parent().find('.conten-tab-text').html();
-        row = $(this).attr('value');
+        var content = $(this).parent().parent().find('.conten-tab-text').html();
+		var value = parseInt($(this).attr('value'));
+        var selected = $(this).is(":checked"); 
+        row = parseInt($(this).parent().parent().attr('row'));
+		setValueSelected(tab,row,value,selected);
+	})
+    
+    $('.send').click(function(){
+        $.ajax({
+        url: "mail.php",
+        type: "post",
+        data: {data:JSON.stringify(result)},
+        success: function (response) {
+           // you will get response from your php page (what you echo or print)                 
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+      });
     })
 })
 $(window).load(function(){
@@ -45,143 +121,8 @@ $(window).resize(function(){
     
 });
 
-  function scrollToElement(selector, time, verticalOffset) {
-      time = typeof(time) != 'undefined' ? time : 500;
-      verticalOffset = typeof(verticalOffset) != 'undefined' ? verticalOffset : 0;
-      element = $(selector);
-      offset = element.offset();
-      offsetTop = offset.top - verticalOffset;
-      $('html, body').animate({
-        scrollTop: offsetTop
-      }, time);
-    };
-
-
-
-
-$(function() {
-
-    var CheckWidth=$(window).width();
-    function PutMetaMenuOnMainMenu()
-           {
-              var width=$(window).width();
-              if(width<=750)
-              {
-                 if($('ul.nav-meta').css('display')!='none')
-                 {
-                        $('ul.nav-meta li').each(function(index){
-                         $('ul.nav').append('<li class="metamenu">'+$(this).html()+'</li>');
-                     });
-                 }
-
-                 //$('.slogan').hide();
-                 $('.nav-meta').hide();
-
-              }
-              else
-              {
-                  $('ul.nav li').each(function(index){
-                     if($(this).hasClass('metamenu'))
-                       $(this).hide();
-                 });
-                 //$('.slogan').show();
-                 $('.nav-meta').show();
-
-              }
-           }
-          PutMetaMenuOnMainMenu();
-           window.addEventListener('resize',function(event)
-            {
-                PutMetaMenuOnMainMenu();
-                var width1=$(window).width();
-                   if(width1!=CheckWidth)
-                    {
-                       //$('.navbar-toggle').click();
-                       //CheckWidth=width1;
-                    }
-            }
-            );
-
-    $("input,textarea").jqBootstrapValidation({
-        preventSubmit: true,
-        submitError: function($form, event, errors) {
-            // additional error messages or events
-        },
-        submitSuccess: function($form, event) {
-            event.preventDefault(); // prevent default submit behaviour
-            // get values from FORM
-            var name = $("input#name").val();
-            var email = $("input#email").val();
-            var betreff = $("input#betreff").val();
-            var message = $("textarea#message").val();
-            var firstName = name; // For Success/Failure Message
-            // Check for white space in name for Success/Fail message
-            if (firstName.indexOf(' ') >= 0) {
-                firstName = name.split(' ').slice(0, -1).join(' ');
-            }
-            $.ajax({
-                url: "././mail/contact_me.php",
-                type: "POST",
-                data: {
-                    name: name,
-                    betreff: betreff,
-                    email: email,
-                    message: message
-                },
-                cache: false,
-                success: function() {
-                    // Success message
-                    $('#success').html("<div class='alert alert-success'>");
-                    $('#success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-                        .append("</button>");
-                    $('#success > .alert-success')
-                        .append("<strong>Your message has been sent. </strong>");
-                    $('#success > .alert-success')
-                        .append('</div>');
-
-                    //clear all fields
-                    $('#signupForm').trigger("reset");
-                },
-                error: function() {
-                    // Fail message
-                    $('#success').html("<div class='alert alert-danger'>");
-                    $('#success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-                        .append("</button>");
-                    $('#success > .alert-danger').append("<strong>Sorry " + firstName + ", it seems that my mail server is not responding. Please try again later!");
-                    $('#success > .alert-danger').append('</div>');
-                    //clear all fields
-                    $('#signupForm').trigger("reset");
-                },
-            })
-        },
-        filter: function() {
-            return $(this).is(":visible");
-        },
-    });
-
-    $("a[data-toggle=\"tab\"]").click(function(e) {
-        e.preventDefault();
-        $(this).tab("show");
-    });
-
-});
-
-
 /*When clicking on Full hide fail/success boxes */
-$('#name').focus(function() {
-    $('#success').html('');
-});
 
-
-$('input#suche').keydown(function(e) {
-    if (e.keyCode == 13) {
-        $('.navbar-form')[0].submit();
-    }
-});
-
-$('.subclose').click(function(e) {
-	$('.nav li').removeAttr("open");
-});
 
  // jqBootstrapValidation
  // * A plugin for automating validation on Twitter Bootstrap formatted forms.
