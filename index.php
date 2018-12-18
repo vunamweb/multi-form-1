@@ -161,19 +161,19 @@
 					  <a class="i_notify" href="#"><img src="images/1x/i_notify.png" alt=""></a>
 					   <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 							<li class="nav-item">
-							  <a page="4" class="nav-link <?php if($i == 1) echo 'active'?>" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"></a>
+							  <a page="3" class="nav-link <?php if($i == 1) echo 'active'?>"  href="#"></a>
 							</li>
 							<li class="nav-item">
-							  <a page="5" class="nav-link <?php if($i == 2) echo 'active'?>" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"></a>
+							  <a page="4" class="nav-link <?php if($i == 2) echo 'active'?>"  href="#" ></a>
 							</li>
 							<li class="nav-item">
-							  <a page="6" class="nav-link <?php if($i == 3) echo 'active'?>" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"></a>
+							  <a page="5" class="nav-link <?php if($i == 3) echo 'active'?>"  href="#"></a>
 							</li>
 							<li class="nav-item">
-							  <a page="7" class="nav-link <?php if($i == 4) echo 'active'?>" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"></a>
+							  <a page="6" class="nav-link <?php if($i == 4) echo 'active'?>"  href="#"></a>
 							</li>
 							<li class="nav-item">
-							  <a page="8" class="nav-link <?php if($i == 5) echo 'active'?>" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"></a>
+							  <a page="7" class="nav-link <?php if($i == 5) echo 'active'?>"  href="#"></a>
 							</li>
 					  </ul>
 					  <div class="tab-content" id="pills-tabContent">
@@ -196,33 +196,33 @@
 										<div class="col col-12 col-sm-4">
 										  <div class="w_checkbox clearfix">
 											<div class="custom-control custom-control-inline checkbox">  
-											  <input id="check1" type="checkbox" name="check" value="1">  
-											  <label for="check1" class="check01"></label>
+											  <input name="<?php echo "check".$i."".$row_question."" ?>" type="radio" id="<?php echo "check".$i."".$row_question."" ?>1" value="1">  
+											  <label for="<?php echo "check".$i."".$row_question."" ?>1" class="check01"></label>
 											  <span class="text_rotate">Stimmt gar nicht</span>
 											</div>
 											<div class="custom-control custom-control-inline checkbox">
-											  <input id="check2" type="checkbox" name="check" value="2">  
-											  <label for="check2" class="check02"></label>
+											  <input name="<?php echo "check".$i."".$row_question."" ?>"  type="radio" id="<?php echo "check".$i."".$row_question."" ?>2" value="2">  
+											  <label for="<?php echo "check".$i."".$row_question."" ?>2" class="check02"></label>
 											  <span class="text_rotate">Stimmt manchmal</span>
 											</div>
 											<div class="custom-control custom-control-inline checkbox">  
-											  <input id="check3" type="checkbox" name="check" value="3">  
-											  <label for="check3" class="check03"></label>
+											  <input name="<?php echo "check".$i."".$row_question."" ?>"  type="radio" id="<?php echo "check".$i."".$row_question."" ?>3" value="3">  
+											  <label for="<?php echo "check".$i."".$row_question."" ?>3" class="check03"></label>
 											  <span class="text_rotate">Teils-teils</span>
 											</div>
 											<div class="custom-control custom-control-inline checkbox">
-											  <input id="check4" type="checkbox" name="check" value="4">  
-											  <label for="check4" class="check04"></label>
+											  <input name="<?php echo "check".$i."".$row_question."" ?>"   type="radio" id="<?php echo "check".$i."".$row_question."" ?>4" value="4">  
+											  <label for="<?php echo "check".$i."".$row_question."" ?>4" class="check04"></label>
 											  <span class="text_rotate">Stimmt häufig</span>
 											</div>
 											<div class="custom-control custom-control-inline checkbox">  
-											  <input id="check5" type="checkbox" name="check" value="5">  
-											  <label for="check5" class="check05"></label>
+											  <input name="<?php echo "check".$i."".$row_question."" ?>"   type="radio"  id="<?php echo "check".$i."".$row_question."" ?>5"value="5">  
+											  <label for="<?php echo "check".$i."".$row_question."" ?>5" class="check05"></label>
 											  <span class="text_rotate">Stimmt immer</span>
 											</div>
 											<div class="custom-control custom-control-inline checkbox">
-											  <input id="check6" type="checkbox" name="check" value="6">  
-											  <label for="check6" class="check06"></label>
+											  <input name="<?php echo "check".$i."".$row_question."" ?>"   type="radio" id="<?php echo "check".$i."".$row_question."" ?>6" value="6">  
+											  <label for="<?php echo "check".$i."".$row_question."" ?>6" class="check06"></label>
 											  <span class="text_rotate">Weiß nicht</span>
 											</div>
 										  </div>

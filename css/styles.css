@@ -234,6 +234,13 @@ ul.list_content_line li p {
 .section_welcome {
   position: relative;
 }
+/* vu nam */
+.w_checkbox input[type=radio] {  
+  display: none;  
+}
+.w_checkbox input[type=radio]:checked + label::before {  
+  background: url('../images/1x/checked.png') left center no-repeat;  
+} 
 
 
 
