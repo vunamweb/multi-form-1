@@ -7,7 +7,7 @@
 // Contact Form Scripts
 //alert($(window).width());
 var result = {};
-var tab = 1;;
+var tab = 1;
 var row;
 var countTab = 5;
 var countSelected = 6;
@@ -59,9 +59,9 @@ function setValueSelected(tab,row,value,selected)
 $("document").ready(function(){
     initData();
     
-    $( '#example1' ).sliderPro({
+    $( '.slider-pro' ).sliderPro({
 			width: 960,
-			height: 500,
+			height: 1300,
 			arrows: true,
 			buttons: false,
 			waitForLayers: true,
@@ -113,6 +113,36 @@ $("document").ready(function(){
         }
       });
     })
+	
+	$('.slider-next').click(function(){
+        $( '.slider-pro' ).sliderPro( 'nextSlide' );
+    })
+	
+	$('.nav-link').click(function(){
+        var page=parseInt($(this).attr('page'));
+		switch(page)
+		{
+		  case 4 :
+		    tab = 1;
+			break;
+		  case 5 :
+		    tab = 2;
+			break;
+		  case 6 :
+		    tab = 3;
+			break;
+		  case 7 :
+		    tab = 4;
+			break;
+		  case 8 :
+		    tab = 5;
+			break;
+		  	
+		}
+		$( '.slider-pro' ).sliderPro( 'gotoSlide',page);
+		
+    })
+	
 })
 $(window).load(function(){
   

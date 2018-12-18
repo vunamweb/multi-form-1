@@ -1,15 +1,12 @@
-<!-- Bootstrap Core CSS -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="css/slider-pro.min.css" media="screen"/>
-<style>
-.left{float:left;padding-left: 20px;}
-.content-tab{display: nonez;}
-.content-tab.first{display: blockz;}
-.sp-thumbnails-container{position: absolute;
-    top: 18px;}
-.sp-slides-container{margin-top: 40px;} 
-</style>
-<?php
+<!doctype html>
+<html class="no-js">
+
+<head>
+    <?php require 'head.php'; ?>
+</head>
+
+<body>
+    <?php
     
   $servername = "localhost";
   $username = "root";
@@ -32,62 +29,235 @@
     if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
     } 
-?>
-<div id="example1" class="slider-pro">
-    <div class="sp-thumbnails">
-        <?php for($i=1;$i<=$countPage;$i++){ ?>
-          <div class="left tab-header sp-thumbnail" tab="<?php echo $i ?>">page<?php echo $i ?></div>
-        <?php }?>
-    </div>
-    <!--<div class="left tab-header" tab="1">page1</div>
-    <div class="left tab-header" tab="2">page2</div>
-    <div class="left tab-header" tab="3">page3</div>
-    <div class="left tab-header" tab="4">page4</div>
-    <div class="left tab-header" tab="5">page5</div> !-->
-    <div style="clear: left;"></div>
-    <br /><br />
-    <div class="sp-slides">
-        <?php for($i=1;$i<=$countPage;$i++){ ?>
-          <div class="sp-slide content-tab <?php if($i == 1) echo 'first'?>" parent-tab="<?php echo $i ?>">
-          <?php 
-            $row_question = 1;
-            $sql = "SELECT * FROM question where page=".$i."";
-            $result = $conn->query($sql);
-            // output data of each row
-            while($row = $result->fetch_assoc()) {
-              ?>
-                <div data-show-transition="left" data-hide-transition="up" data-show-delay="<?php echo 200*$row_question ?>" data-hide-delay="<?php echo 200*$row_question ?>" style="margin-bottom: 20px;padding-bottom: 20px" row="<?php echo $row_question ?>">
-                     <div class="conten-tab-text col-md-6"><?php echo $row['description'] ?></div>
-                     <div class="col-md-6">
-                          <input type="checkbox" value="1" />
-                          <input type="checkbox" value="2" />
-                          <input type="checkbox" value="3" />
-                          <input type="checkbox" value="4" />
-                          <input type="checkbox" value="5" />
-                          <input type="checkbox" value="6" />
-                     </div>
-                </div>
-                <div style="clear: left;"></div>
-              <?php  
-              $row_question++;          
-            }
-          ?>
-          </div>
-        <?php }?>
-    </div>
-</div>
+   ?>
+	<div id="page">
+		<?php require 'header.php'; ?>
 
-<input type="button" class="send" value="send" />
+      	<main>
+		  <div class="slider-pro">
+		     
+		
+			<div class="sp-slides">
+			  <!-- page wellcome  -->
+			  <div class="sp-slide">
+				 <section class="section_welcome">
+					<div class="container">
+						<div class="row">
+							<div class="col col-12">
+								<h2 class="headline">Digital Readiness Check</h2>
+								<h3 class="sub_headline">Status und Anforderungen ermitteln</h3>
+								<p>Ihr Team, Bereich oder das gesamte Unternehmen - auf
+								den verschiedenen Ebenen der Organisation kann die
+								Bereitschaft zur digitalen Transformation unterschiedlich
+								sein. Für Sie ist wichtig zu wissen: „Ready to go?“
+								Die Bereitschaft zum Handeln ist entscheidend. Nur
+								dann werden vorhandene Fähigkeiten aktiviert und
+								konsequent neue Kompetenzen entwickelt. Das zeichnet
+								eine leistungsfähige Organisation aus.</p>
+								<p>Der folgende Check zeigt, wo Ihre Einheit oder gesamte
+								Organisation steht, wo Hindernisse sind und welche
+								nächsten Schritte zur erfolgreichen digitalen Transformation
+								aktuell geeignet sind. Die nachfolgenden Punkte
+								für ihre Eigenbewertung folgen einem klaren Raster.
+								Jedes Ergebnis ist wertvoll zur Planung der weiteren
+								digitalen Transformation.</p>
+								<p>Selbstverständlich ist jede einzelne Bewertung subjektiv.
+								Durch die insgesamt 50 Aussagen, die Sie gleich
+								einordnen, ergibt sich jedoch ein Bild, mit dem Sie
+								optimal arbeiten können. Die nächsten 10 bis maximal
+								15 Minuten sind also gut investiert. Beginnen wir mit
+								einigen kurzen Angaben, damit die Aussagen für Sie
+								ausgewertet werden können.</p>
+								<a class="slider-next btn btnOrange" href="#" class="btn btnOrange">Hier geht´s weiter</a>
+							</div>
+						</div>
+					</div>
+      		     </section>
+			</div>
+			<!-- end page wellcome  -->
+			
+			<!-- page register  -->
+			 <div class="sp-slide">
+				 <section class="section_welcome">
+					<div class="container">
+						<div class="row">
+							<div class="col col-12">
+								<h2 class="headline">Digital Readiness Check</h2>
+								<h3 class="sub_headline">Registrierung</h3>
+								<p>Bitte füllen Sie die nachfolgenden Felder aus und bestätigen die Nutzung Ihrer Angaben, damit wir das Ergebnis des Digital Readiness Check bewerten, Ihnen zusenden und besprechen können.</p>
+								<form class="frm_register">
+									<div class="form-group">
+										<input type="text" class="form-control" placeholder="Vorname">
+									</div>
+									<div class="form-group">
+										<input type="text" class="form-control" placeholder="Name">
+									</div>
+									<div class="form-group">
+										<input type="text" class="form-control" placeholder="Unternehmen">
+									</div>
+									<div class="form-group">
+										<input type="text" class="form-control" placeholder="E-Mail">
+									</div>
+									<div class="form-group">
+										<input type="text" class="form-control" placeholder="Telefon">
+									</div>
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+										<label class="form-check-label" for="defaultCheck1">
+											Feld zum Anklicken<br>
+											Ich stimme zu, dass Groß & Cie. meine Angaben aus dem Formular
+											und der nachfolgenden Checkliste zum Zwecke der Auswertung
+											speichert. Die Daten werden nach abgeschlossener Bearbeitung gelöscht.<br>
+											Hinweis: Sie können Ihre Einwilligung jederzeit per E-Mail an info@
+											gross-cie.com widerrufen. Detaillierte Informationen zum Umgang
+											mit Nutzerdaten finden Sie in unserer Datenschutzerklärung
+										</label>
+									</div>
+									<button type="submit" class="btn btnOrange slider-next">Hier geht´s zur Checkliste</button>
+								  </form>
+							</div>
+						</div>
+					</div>
+      		</section>
+			</div>
+			<!-- end page register  -->  
+			
+			<!-- page explain  -->
+			 <div class="sp-slide">
+			   <section class="section_welcome">
+					<div class="container">
+						<div class="row">
+							<div class="col col-12">
+								<h2 class="headline">Digital Readiness Check</h2>
+								<h3 class="sub_headline">Einleitung</h3>
+								<p>Jeder Teil besteht aus zehn Aussagen. Zu jeder Selbstaussage wählen
+								Sie bitte aus den immer gleichen fünf Bewertungen jeweils diejenige,
+								die für die Situation in der organisationalen Einheit, die Sie
+								betrachten, aktuell zutreffend ist. Kreuzen Sie das passende Feld an:</p>
+								<ul class="list_explain">
+									<li class="clearfix"><span class="box">--</span> <span class="text">bedeutet „Stimmt gar nicht“ - Die Aussage trifft in keinem Fall zu.</span></li>
+									<li class="clearfix"><span class="box">-</span> <span class="text">bedeutet „Stimmt manchmal“ - In Ausnahmefällen trifft die Aussagezu.</span></li>
+									<li class="clearfix"><span class="box">◦</span> <span class="text">bedeutet „Teils-teils“ - Die Aussage ist sehr wechselhaft gültig.</span></li>
+									<li class="clearfix"><span class="box">+</span> <span class="text">bedeutet „Stimmt häufig“ - In der Regel trifft die Aussage zu.</li>
+									<li class="clearfix"><span class="box">++</span> <span class="text">bedeutet „Stimmt immer“ - Die Aussage stimmt ohne Einschränkung.</span></li>
+									<li class="clearfix"><span class="box">?</span> <span class="text">bedeutet „Weiß nicht“ - Die Aussage kann nicht bewertet werden.</span></li>
+								</ul>
+								<a href="#" class="btn btnOrange slider-next">Start</a>
+							</div>
+						</div>
+					</div>
+      		</section>
+			</div>
+			<!-- end page explain  --> 
+			
+			<!-- page question  -->
+			 <?php for($i=1;$i<=$countPage;$i++){ ?>
+			  <div class="sp-slide">
+				   <section class="section_welcome">
+					<div class="container">
+						<div class="row">
+							<div class="col col-12">
+								<h4 class="sub_headline2">Situation</h4>
+					  <a class="i_notify" href="#"><img src="images/1x/i_notify.png" alt=""></a>
+					   <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+							<li class="nav-item">
+							  <a page="4" class="nav-link <?php if($i == 1) echo 'active'?>" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"></a>
+							</li>
+							<li class="nav-item">
+							  <a page="5" class="nav-link <?php if($i == 2) echo 'active'?>" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"></a>
+							</li>
+							<li class="nav-item">
+							  <a page="6" class="nav-link <?php if($i == 3) echo 'active'?>" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"></a>
+							</li>
+							<li class="nav-item">
+							  <a page="7" class="nav-link <?php if($i == 4) echo 'active'?>" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"></a>
+							</li>
+							<li class="nav-item">
+							  <a page="8" class="nav-link <?php if($i == 5) echo 'active'?>" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"></a>
+							</li>
+					  </ul>
+					  <div class="tab-content" id="pills-tabContent">
+						<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+						  <h6>Starten wir mit der Situation!</h6>
+						  <p>Bitte bewerten Sie jede Aussage, damit die Checkliste vollständig ist.</p>
+						  <ul class="list_content_line">
+							 <?php 
+								$row_question = 1;
+								$sql = "SELECT * FROM question where page=".$i."";
+								$result = $conn->query($sql);
+								// output data of each row
+								while($row = $result->fetch_assoc()) {
+								  ?>
+									<li>
+									  <div class="row" row="<?php echo $row_question ?>">
+										<div class="col col-12 col-sm-8 conten-tab-text">
+										  <p><?php echo $row['description'] ?></p>
+										</div>
+										<div class="col col-12 col-sm-4">
+										  <div class="w_checkbox clearfix">
+											<div class="custom-control custom-control-inline checkbox">  
+											  <input id="check1" type="checkbox" name="check" value="1">  
+											  <label for="check1" class="check01"></label>
+											  <span class="text_rotate">Stimmt gar nicht</span>
+											</div>
+											<div class="custom-control custom-control-inline checkbox">
+											  <input id="check2" type="checkbox" name="check" value="2">  
+											  <label for="check2" class="check02"></label>
+											  <span class="text_rotate">Stimmt manchmal</span>
+											</div>
+											<div class="custom-control custom-control-inline checkbox">  
+											  <input id="check3" type="checkbox" name="check" value="3">  
+											  <label for="check3" class="check03"></label>
+											  <span class="text_rotate">Teils-teils</span>
+											</div>
+											<div class="custom-control custom-control-inline checkbox">
+											  <input id="check4" type="checkbox" name="check" value="4">  
+											  <label for="check4" class="check04"></label>
+											  <span class="text_rotate">Stimmt häufig</span>
+											</div>
+											<div class="custom-control custom-control-inline checkbox">  
+											  <input id="check5" type="checkbox" name="check" value="5">  
+											  <label for="check5" class="check05"></label>
+											  <span class="text_rotate">Stimmt immer</span>
+											</div>
+											<div class="custom-control custom-control-inline checkbox">
+											  <input id="check6" type="checkbox" name="check" value="6">  
+											  <label for="check6" class="check06"></label>
+											  <span class="text_rotate">Weiß nicht</span>
+											</div>
+										  </div>
+										</div>
+									  </div>
+								</li>
+								  <?php  
+								  $row_question++;          
+								}
+							 ?>
+							</ul>
 
+						</div>
+						<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+						  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic perspiciatis doloremque quod excepturi accusantium assumenda? Quos soluta mollitia itaque blanditiis voluptas beatae maxime provident illum, id nemo quae iure, harum.</p>
+						</div>
+						<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+						  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic perspiciatis doloremque quod excepturi accusantium assumenda? Quos soluta mollitia itaque blanditiis voluptas beatae maxime provident illum, id nemo quae iure, harum.</p>
+						</div>
+					  </div>
+								<a href="questions2.php" class="btn btnOrange">WEITER MIT TEIL <?php echo $i; ?> VON 5</a>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+			 <?php }?>
+			 
+			<!-- end page question  -->
+			</div>
+		  </div>
+		</main>
+	</div>
 
-<!-- jQuery -->
-<script src="js/jquery.js"></script>
+    <?php require 'js-footer.php'; ?>
+</body>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
-
-<!-- Slider Pro -->
-<script src="js/jquery.sliderPro.min.js"></script>
-
-<script src="js/init.js"></script>
-
+</html>
