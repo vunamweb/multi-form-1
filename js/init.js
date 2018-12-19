@@ -7,7 +7,7 @@
 // Contact Form Scripts
 //alert($(window).width());
 var result = {};
-var tab = 1;
+var tab;
 var row;
 var countTab = 5;
 var countSelected = 6;
@@ -17,12 +17,13 @@ function initData()
     var parent_tab;
     var row;
     result.tab = [];
+	result.statusPage = [];
     for(tab=1;tab<=countTab;tab++)
     {
         result.tab[tab] = {};
         result.tab[tab].row = [];
         $('.conten-tab-text').each(function(e){
-            parent_tab = parseInt($(this).parent().parents().attr('parent-tab'));
+            parent_tab = parseInt($(this).attr('parent-tab'));
             if(tab == parent_tab)
             {
                 row = parseInt($(this).parent().attr('row'));
@@ -36,6 +37,8 @@ function initData()
             }
         })
     }
+	//init tab
+	tab = 1;
 }
 function showAnimation(tab)
 {
@@ -47,13 +50,49 @@ function hideAnimation(tab)
     //$(tab).hide();
 }
 
-function setValueSelected(tab,row,value,selected)
+function setValueSelected(tab,row,value)
 {
    //result.tab[tab].row[row] = (result.tab[tab].row[row] != null)?result.tab[tab].row[row]:{};
    //result.tab[tab].row[row].content = content;
    //result.tab[tab].row[row].selected = (result.tab[tab].row[row].selected != null)? result.tab[tab].row[row].selected :{};
-   var text = (selected)? 'yes':'no';
-   result.tab[tab].row[row].selected[value] = text;
+   for(selected=1;selected<=6;selected++)
+     result.tab[tab].row[row].selected[selected] = 'no';
+   //var text = (selected)? 'yes':'no';
+   result.tab[tab].row[row].selected[value] = 'yes';
+}
+
+function getCountRowTab(tab)
+{
+   var count = 0;
+   $('.conten-tab-text').each(function(e){
+	     if(parseInt($(this).attr('parent-tab')) == tab)
+			 count++;
+   })
+   return count;
+}
+
+function checkFinishQuestionRow(tab,row)
+{
+   for(selected=1;selected<=6;selected++)
+	 if(result.tab[tab].row[row].selected[selected] == 'yes')
+       return 1;
+   return 0;   
+}
+
+function checkFinishQuestionTab(tab)
+{
+  for(row=1;row<=getCountRowTab(tab);row++)
+	  if(!checkFinishQuestionRow(tab,row) == 1)
+		  return 0;
+  return 1;	  
+}
+
+function removeDisableNextPage(tab)
+{
+  $('.nextPage').each(function(e){
+	if(parseInt($(this).attr('tab')) == tab)
+      $(this).removeClass('disabled');  		
+  })
 }
 
 $("document").ready(function(){
@@ -61,7 +100,7 @@ $("document").ready(function(){
     
     $( '.slider-pro' ).sliderPro({
 			width: 960,
-			height: 1300,
+			height: 2000,
 			arrows: true,
 			buttons: false,
 			waitForLayers: true,
@@ -78,7 +117,7 @@ $("document").ready(function(){
 			}
 		});
     
-    $('.tab-header').click(function(){
+    /* $('.tab-header').click(function(){
         //set page
         tab = $(this).attr("tab");
         //show tab content , hide content of all another tab
@@ -90,14 +129,22 @@ $("document").ready(function(){
              hideAnimation(this);
         })
         tab = parseInt(tab);
-    })
+    }) */
     
-    $(".content-tab input[type='checkbox']").click(function(){
-        var content = $(this).parent().parent().find('.conten-tab-text').html();
+    $(".w_checkbox input[type='radio']").click(function(){
+        //var content = $(this).parent().parent().parent().parent().find('.conten-tab-text').html();
 		var value = parseInt($(this).attr('value'));
-        var selected = $(this).is(":checked"); 
-        row = parseInt($(this).parent().parent().attr('row'));
-		setValueSelected(tab,row,value,selected);
+        //var selected = 'yes'; //$(this).is(":checked"); 
+        row = parseInt($(this).parent().parent().parent().parent().attr('row'));
+		setValueSelected(tab,row,value);
+		if(checkFinishQuestionTab(tab) == 1)
+		{
+		   //remove disabled button next
+		   removeDisableNextPage(tab);
+		   //set status yes for tab and next tab
+		   result.statusPage[tab] = 'yes';
+		   result.statusPage[tab+1] = 'yes';
+		}
 	})
     
     $('.send').click(function(){
@@ -120,28 +167,48 @@ $("document").ready(function(){
 	
 	$('.nav-link').click(function(){
         var page=parseInt($(this).attr('page'));
-		switch(page)
+		if(result.statusPage[page-2] == 'yes')
 		{
-		  case 4 :
-		    tab = 1;
-			break;
-		  case 5 :
-		    tab = 2;
-			break;
-		  case 6 :
-		    tab = 3;
-			break;
-		  case 7 :
-		    tab = 4;
-			break;
-		  case 8 :
-		    tab = 5;
-			break;
-		  	
+		    switch(page)
+			{
+			  case 3 :
+				tab = 1;
+				break;
+			  case 4 :
+				tab = 2;
+				break;
+			  case 5 :
+				tab = 3;
+				break;
+			  case 6 :
+				tab = 4;
+				break;
+			  case 7 :
+				tab = 5;
+				break;
+				
+			}
+			$( '.slider-pro' ).sliderPro( 'gotoSlide',page);
 		}
-		$( '.slider-pro' ).sliderPro( 'gotoSlide',page);
-		
-    })
+	})
+	
+	$('.nextPage').click(function(){
+        var page = parseInt($(this).attr('page'));
+		tab = page -2 ;
+		$( '.slider-pro' ).sliderPro( 'gotoSlide',9);
+		//addition
+		 for(tab=1;tab<=countTab;tab++)
+         {
+			var countRowTab = result.tab[tab].row.length;
+			for(row=1;row<=countRowTab;row++)
+			 for(selected=1;selected<=6;selected++)
+				if(result.tab[tab].row[row].selected[selected] == 'yes')
+				{
+				  var id = 'setting' + tab + row + selected;
+				  $('#'+id+'').find('input').attr('checked', true);
+				}					
+		}
+	})
 	
 })
 $(window).load(function(){

@@ -202,7 +202,7 @@ ul.list_explain li .text {
 }
 .i_notify {
   display: block;
-  position: absolute;
+  position: absolute !important;
   top: 0;
   right: 20px;
 }
