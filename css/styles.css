@@ -241,6 +241,7 @@ ul.list_content_line li p {
 .w_checkbox input[type=radio]:checked + label::before {  
   background: url('../images/1x/checked.png') left center no-repeat;  
 } 
+.page-control-setting{height:auto !important}
 
 
 

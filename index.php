@@ -142,7 +142,7 @@
 									<li class="clearfix"><span class="box">++</span> <span class="text">bedeutet „Stimmt immer“ - Die Aussage stimmt ohne Einschränkung.</span></li>
 									<li class="clearfix"><span class="box">?</span> <span class="text">bedeutet „Weiß nicht“ - Die Aussage kann nicht bewertet werden.</span></li>
 								</ul>
-								<a href="#" class="btn btnOrange slider-next">Start</a>
+								<a href="#" class="btn btnOrange slider-next start-question">Start</a>
 							</div>
 						</div>
 					</div>
@@ -152,7 +152,7 @@
 			
 			<!-- page question  -->
 			 <?php for($i=1;$i<=$countPage;$i++){ ?>
-			  <div class="sp-slide">
+			  <div class="sp-slide page-question">
 				   <section class="section_welcome">
 					<div class="container">
 						<div class="row">
@@ -189,7 +189,7 @@
 								while($row = $result->fetch_assoc()) {
 								  ?>
 									<li>
-									  <div class="row" row="<?php echo $row_question ?>">
+									  <div class="row row_question" row="<?php echo $row_question ?>">
 										<div class="col col-12 col-sm-8 conten-tab-text" parent-tab="<?php echo $i ?>">
 										  <p><?php echo $row['description'] ?></p>
 										</div>
@@ -271,8 +271,8 @@
 								quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 								consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
 								cillum dolore eu fugiat nulla pariatur.</p>
-								<p class="mb-0"><a href="results.php" class="btn btnBlue">ABSSENDEN</a></p>
-								<a href="control_settings.php" class="btn btnOrange">VORAB PRÜFEN</a>
+								<p class="mb-0"><a href="#" class="btn btnBlue btnSendmail">ABSSENDEN</a></p>
+								<a href="#" class="btn btnOrange btnPreview">VORAB PRÜFEN</a>
 							</div>
 						</div>
 					</div>
@@ -281,7 +281,7 @@
 			<!-- end page finish -->
 			
 			<!-- page control setting -->
-			<div class="sp-slide">
+			<div class="sp-slide page-control-setting">
 			   <section class="section_welcome">
       			<div class="container">
       				<div class="row">
@@ -301,33 +301,33 @@
 										  <?php echo $row['description'] ?>
 										  <div class="w_checkbox clearfix">
 											<div class="custom-control custom-control-inline checkbox" id="setting<?php echo $i . $row_question .'1' ?>">  
-											  <input name="<?php echo "check".$i."".$row_question."" ?>" type="radio" id="<?php echo "check".$i."".$row_question."" ?>1" value="1">  
-											  <label for="<?php echo "check".$i."".$row_question."" ?>1" class="check01"></label>
+											  <input name="<?php echo "check".$i."".$row_question."" ?>" type="radio" id="<?php echo "check_setting".$i."".$row_question."" ?>1" value="<?php echo $i ?>;<?php echo $row_question ?>;1">  
+											  <label for="<?php echo "check_setting".$i."".$row_question."" ?>1" class="check01"></label>
 											  <span class="text_rotate">Stimmt gar nicht</span>
 											</div>
 											<div class="custom-control custom-control-inline checkbox" id="setting<?php echo $i . $row_question .'2' ?>">
-											  <input name="<?php echo "check".$i."".$row_question."" ?>"  type="radio" id="<?php echo "check".$i."".$row_question."" ?>2" value="2">  
-											  <label for="<?php echo "check".$i."".$row_question."" ?>2" class="check02"></label>
+											  <input name="<?php echo "check".$i."".$row_question."" ?>"  type="radio" id="<?php echo "check_setting".$i."".$row_question."" ?>2" value="<?php echo $i ?>;<?php echo $row_question ?>;2">  
+											  <label for="<?php echo "check_setting".$i."".$row_question."" ?>2" class="check02"></label>
 											  <span class="text_rotate">Stimmt manchmal</span>
 											</div>
 											<div class="custom-control custom-control-inline checkbox" id="setting<?php echo $i . $row_question .'3' ?>">  
-											  <input name="<?php echo "check".$i."".$row_question."" ?>"  type="radio" id="<?php echo "check".$i."".$row_question."" ?>3" value="3">  
-											  <label for="<?php echo "check".$i."".$row_question."" ?>3" class="check03"></label>
+											  <input name="<?php echo "check".$i."".$row_question."" ?>"  type="radio" id="<?php echo "check_setting".$i."".$row_question."" ?>3" value="<?php echo $i ?>;<?php echo $row_question ?>;3">  
+											  <label for="<?php echo "check_setting".$i."".$row_question."" ?>3" class="check03"></label>
 											  <span class="text_rotate">Teils-teils</span>
 											</div>
 											<div class="custom-control custom-control-inline checkbox" id="setting<?php echo $i . $row_question .'4' ?>">
-											  <input name="<?php echo "check".$i."".$row_question."" ?>"   type="radio" id="<?php echo "check".$i."".$row_question."" ?>4" value="4">  
-											  <label for="<?php echo "check".$i."".$row_question."" ?>4" class="check04"></label>
+											  <input name="<?php echo "check".$i."".$row_question."" ?>"   type="radio" id="<?php echo "check_setting".$i."".$row_question."" ?>4" value="<?php echo $i ?>;<?php echo $row_question ?>;4">  
+											  <label for="<?php echo "check_setting".$i."".$row_question."" ?>4" class="check04"></label>
 											  <span class="text_rotate">Stimmt häufig</span>
 											</div>
 											<div class="custom-control custom-control-inline checkbox" id="setting<?php echo $i . $row_question .'5' ?>">  
-											  <input name="<?php echo "check".$i."".$row_question."" ?>"   type="radio"  id="<?php echo "check".$i."".$row_question."" ?>5"value="5">  
-											  <label for="<?php echo "check".$i."".$row_question."" ?>5" class="check05"></label>
+											  <input name="<?php echo "check".$i."".$row_question."" ?>"   type="radio"  id="<?php echo "check_setting".$i."".$row_question."" ?>5"value="<?php echo $i ?>;<?php echo $row_question ?>;5">  
+											  <label for="<?php echo "check_setting".$i."".$row_question."" ?>5" class="check05"></label>
 											  <span class="text_rotate">Stimmt immer</span>
 											</div>
 											<div class="custom-control custom-control-inline checkbox" id="setting<?php echo $i . $row_question .'6' ?>">
-											  <input name="<?php echo "check".$i."".$row_question."" ?>"   type="radio" id="<?php echo "check".$i."".$row_question."" ?>6" value="6">  
-											  <label for="<?php echo "check".$i."".$row_question."" ?>6" class="check06"></label>
+											  <input name="<?php echo "check".$i."".$row_question."" ?>"   type="radio" id="<?php echo "check_setting".$i."".$row_question."" ?>6" value="<?php echo $i ?>;<?php echo $row_question ?>;6">  
+											  <label for="<?php echo "check_setting".$i."".$row_question."" ?>6" class="check06"></label>
 											  <span class="text_rotate">Weiß nicht</span>
 											</div>
 											
@@ -346,9 +346,35 @@
       			</div>
       		</section>
           
-          <a href="finished.php" class="btn btnOrange btnReady">FERTIG</a>
+          <a href="#" class="btn btnOrange btnReady">FERTIG</a>
 			</div>
-			<!-- end page control setting -->
+		  <!-- end page control setting -->
+		  
+          <!-- page result -->
+			<div class="sp-slide">
+			  <section class="section_welcome">
+      			<div class="container">
+      				<div class="row">
+      					<div class="col col-12">
+      						<h2 class="headline">Digital Readiness Check</h2>
+      						<h3 class="sub_headline">Ergebnis</h3>
+      						<p>Die gesamte Checkliste mit allen Ihren Bewertungen
+                  erhalten Sie per E-Mail zugesandt. Daraus ergibt sich
+                  ein gutes Bild der Bereitschaft zur Veränderung. Gerne
+                  betrachten wir mit Ihnen das Ergebnis im Detail und
+                  besprechen die möglichen konkreten Schritte zur erfolgreichen
+                  digitalen Transformation. Rufen Sie direkt
+                  Dr. Michael Groß unter 0171 2428 624 an oder senden
+                  ihm einen E-Mail (Link).</p>
+                  <p>Wir wünschen Ihnen in jedem Fall weiter viel Erfolg!</p>
+                  <p><a class="btn btn-link" href="#" title="">Hier finden Sie Tipps zur eigenen Bewertung</a></p>
+                  <p><a class="btn btn-link" href="index.php" title="">Zur Homepage von Groß & Cie</a></p>
+      					</div>
+      				</div>
+      			</div>
+      		</section>
+			</div>
+		  <!-- end page result -->		  
 			
 			</div>
 		  </div>

@@ -11,6 +11,7 @@ var tab;
 var row;
 var countTab = 5;
 var countSelected = 6;
+var width = $(window).width();
 
 function initData()
 {
@@ -95,10 +96,19 @@ function removeDisableNextPage(tab)
   })
 }
 
+function showFirstRowOnMobile()
+{
+  $('.page-question .row_question').each(function(e){
+	  var row = $(this).attr('row');
+	  if(parseInt(row) != 1)
+	    $(this).find('.col.col-12.col-sm-4').hide();
+  })
+  
+}
+
 $("document").ready(function(){
     initData();
-    
-    $( '.slider-pro' ).sliderPro({
+	$( '.slider-pro' ).sliderPro({
 			width: 960,
 			height: 2000,
 			arrows: true,
@@ -131,7 +141,7 @@ $("document").ready(function(){
         tab = parseInt(tab);
     }) */
     
-    $(".w_checkbox input[type='radio']").click(function(){
+    $(".page-question input[type='radio']").click(function(){
         //var content = $(this).parent().parent().parent().parent().find('.conten-tab-text').html();
 		var value = parseInt($(this).attr('value'));
         //var selected = 'yes'; //$(this).is(":checked"); 
@@ -145,15 +155,34 @@ $("document").ready(function(){
 		   result.statusPage[tab] = 'yes';
 		   result.statusPage[tab+1] = 'yes';
 		}
+		//mobile 
+		if(width<=768)
+		{
+		    //opacity and hide input
+			$(this).parent().parent().parent().parent().parent().css('opacity','0.7');
+			$(this).parent().parent().parent().hide();
+			//show input next row
+			$(this).parent().parent().parent().parent().parent().next().find('.col.col-12.col-sm-4').show();
+		}
+		
+	})
+	
+	$(".page-control-setting input[type='radio']").click(function(){
+        var value = $(this).attr('value').split(';');
+		var tab = parseInt(value[0]);
+		var row = parseInt(value[1]);
+		var selected = parseInt(value[2]);
+		setValueSelected(tab,row,selected);
 	})
     
-    $('.send').click(function(){
+    $('.btnSendmail').click(function(){
         $.ajax({
         url: "mail.php",
         type: "post",
         data: {data:JSON.stringify(result)},
         success: function (response) {
-           // you will get response from your php page (what you echo or print)                 
+           // you will get response from your php page (what you echo or print)   
+			$( '.slider-pro' ).sliderPro( 'gotoSlide',10);		   
         },
         error: function(jqXHR, textStatus, errorThrown) {
            console.log(textStatus, errorThrown);
@@ -163,6 +192,12 @@ $("document").ready(function(){
 	
 	$('.slider-next').click(function(){
         $( '.slider-pro' ).sliderPro( 'nextSlide' );
+    })
+	
+	$('.start-question').click(function(){
+        if($(window).width()<=768)
+	      showFirstRowOnMobile();
+		$( '.slider-pro' ).sliderPro( 'nextSlide' );
     })
 	
 	$('.nav-link').click(function(){
@@ -195,19 +230,29 @@ $("document").ready(function(){
 	$('.nextPage').click(function(){
         var page = parseInt($(this).attr('page'));
 		tab = page -2 ;
-		$( '.slider-pro' ).sliderPro( 'gotoSlide',9);
-		//addition
-		 for(tab=1;tab<=countTab;tab++)
+		$( '.slider-pro' ).sliderPro( 'gotoSlide',page);
+	})
+	
+	$('.btnReady').click(function(){
+        $('.sp-mask').css('height','2000px');
+		$( '.slider-pro' ).sliderPro( 'gotoSlide',8);
+	})
+	
+	$('.btnPreview').click(function(){
+        for(tab=1;tab<=countTab;tab++)
          {
 			var countRowTab = result.tab[tab].row.length;
-			for(row=1;row<=countRowTab;row++)
+			for(row=1;row<=countRowTab-1;row++)
 			 for(selected=1;selected<=6;selected++)
-				if(result.tab[tab].row[row].selected[selected] == 'yes')
+			   //console.log(tab + '-' + row + '-' + selected);	 
+			   if(result.tab[tab].row[row].selected[selected] == 'yes')
 				{
 				  var id = 'setting' + tab + row + selected;
 				  $('#'+id+'').find('input').attr('checked', true);
 				}					
 		}
+		$('.sp-mask').css('height','6000px');
+		$( '.slider-pro' ).sliderPro( 'gotoSlide',9);
 	})
 	
 })
@@ -215,7 +260,8 @@ $(window).load(function(){
   
 });
 $(window).resize(function(){
-    
+    if($(window).width()<=768)
+	  showFirstRowOnMobile();
 });
 
 /*When clicking on Full hide fail/success boxes */
